@@ -15,3 +15,14 @@ endif()
 
 add_executable(ann_cli src/main.cpp)
 target_link_libraries(ann_cli PRIVATE ann_core)
+
+enable_testing()
+add_executable(ann_tests tests/test_ann.cpp)
+target_link_libraries(ann_tests PRIVATE ann_core)
+# Make assert() active even when the rest of the project is built in Release.
+if(MSVC)
+    target_compile_options(ann_tests PRIVATE /UNDEBUG)
+else()
+    target_compile_options(ann_tests PRIVATE -UNDEBUG)
+endif()
+add_test(NAME sequential_ivf_flat COMMAND ann_tests)

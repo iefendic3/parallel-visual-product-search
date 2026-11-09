@@ -1,0 +1,23 @@
+name: C++ sequential engine CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build --parallel
+      - name: Run tests
+        run: ctest --test-dir build --output-on-failure
+      - name: CLI smoke test
+        run: |
+          ./build/ann_cli build --input examples/sample_vectors.csv --output build/sample.ivf --clusters 3 --iterations 25 --train-size 0
+          ./build/ann_cli search --index build/sample.ivf --query 0.11,0.12 --topk 3 --nprobe 1
+          ./build/ann_cli evaluate --index build/sample.ivf --queries examples/sample_queries.csv --topk 3 --nprobe 2
