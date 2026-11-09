@@ -12,3 +12,6 @@ if(MSVC)
 else()
     target_compile_options(ann_core PRIVATE -Wall -Wextra -Wpedantic)
 endif()
+
+add_executable(ann_cli src/main.cpp)
+target_link_libraries(ann_cli PRIVATE ann_core)
