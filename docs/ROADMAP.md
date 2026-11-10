@@ -9,15 +9,15 @@
 - [x] Save/load reusable index
 - [x] Smoke tests and CLI evaluation
 - [x] Documentation, research papers, related GitHub projects
-- [ ] Run and verify larger real-world benchmarks
+- [x] Run and verify larger real-world benchmarks
 
 ## Milestone 2 — real product-data pipeline
 
-- [ ] Download and parse the ABO subset + listing metadata
-- [ ] Choose pretrained visual embedding model and document its license
-- [ ] Generate consistent normalized vectors for catalog images
-- [ ] Maintain mappings: image ID -> product ID/title/image path
-- [ ] Validate nearest-neighbor behavior manually using representative images
+- [x] Download and parse the ABO subset + listing metadata
+- [x] Choose pretrained visual embedding model and document its license
+- [x] Generate consistent normalized vectors for catalog images
+- [x] Maintain mappings: image ID -> product ID/title/image path
+- [x] Validate nearest-neighbor behavior manually using representative images
 
 ## Milestone 3 — parallel CPU (OpenMP)
 

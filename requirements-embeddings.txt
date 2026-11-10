@@ -1,0 +1,6 @@
+# Python 3.10+; use an arm64 Python on Apple Silicon.
+# Keep torch/torchvision as a compatible pair. No ANN library is used here.
+torch==2.10.0
+torchvision==0.25.0
+open_clip_torch==3.3.0
+Pillow==12.1.0

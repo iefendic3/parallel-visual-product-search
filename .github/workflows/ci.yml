@@ -1,4 +1,4 @@
-name: C++ sequential engine CI
+name: Sequential engine and ABO pipeline CI
 
 on:
   push:
@@ -21,3 +21,11 @@ jobs:
           ./build/ann_cli build --input examples/sample_vectors.csv --output build/sample.ivf --clusters 3 --iterations 25 --train-size 0
           ./build/ann_cli search --index build/sample.ivf --query 0.11,0.12 --topk 3 --nprobe 1
           ./build/ann_cli evaluate --index build/sample.ivf --queries examples/sample_queries.csv --topk 3 --nprobe 2
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image decoding test dependency
+        run: python -m pip install Pillow==12.1.0
+      - name: Test local ABO pipeline (no pretrained weights)
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
