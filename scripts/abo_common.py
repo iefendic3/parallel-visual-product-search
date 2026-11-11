@@ -21,11 +21,13 @@ def valid_id(value):
     return value
 
 
-def manifest_rows(manifest):
+def manifest_rows(manifest, require_products=True):
     """Stream records. image_path is always relative to the manifest directory."""
     with Path(manifest).open(newline='', encoding='utf-8') as stream:
         reader = csv.DictReader(stream)
-        required = {'image_id', 'product_id', 'image_path'}
+        required = {'image_id', 'image_path'}
+        if require_products:
+            required.add('product_id')
         if not required.issubset(reader.fieldnames or []):
             raise ValueError(f'Manifest must have columns: {sorted(required)}')
         for line, row in enumerate(reader, 2):
